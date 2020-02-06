@@ -34,7 +34,11 @@ public class RatingsController {
     }
 
     @GetMapping
-    public Map<Integer, Integer> getRatings(@RequestParam String talkId) {
-        return ratingsRepository.findAll(talkId);
+    public ResponseEntity<Map<Integer, Integer>> getRatings(@RequestParam String talkId) {
+        Map<Integer, Integer> ratings = ratingsRepository.findAll(talkId);
+        if (ratings.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ratings);
     }
 }

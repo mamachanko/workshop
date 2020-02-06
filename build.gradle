@@ -9,6 +9,11 @@ repositories {
     jcenter()
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 sourceSets {
     acceptanceTest {
         compileClasspath += main.output + test.output
@@ -44,11 +49,10 @@ dependencies {
     testCompile 'org.testcontainers:postgresql'
     testCompile 'org.testcontainers:kafka'
     testCompile 'org.awaitility:awaitility:3.0.0'
-
-    acceptanceTestCompile 'org.testcontainers:selenium'
-    acceptanceTestCompile 'org.seleniumhq.selenium:selenium-java:3.13.0'
-
     testRuntime 'com.h2database:h2'
+
+    acceptanceTestCompile 'org.testcontainers:selenium:1.12.5'
+    acceptanceTestCompile 'org.seleniumhq.selenium:selenium-java:3.13.0'
 }
 
 task acceptanceTest(type: Test) {
